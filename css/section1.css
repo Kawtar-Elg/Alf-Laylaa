@@ -1,112 +1,115 @@
+@font-face {
+  font-family: "Higuen Serif";
+  src: url("../fonts/Higuen Serif.otf") format("opentype");
+}
 
 @font-face {
-    font-family: 'Higuen Serif';
-    src: url('./fonts/Higuen Serif.otf') format('opentype');
+  font-family: "Collingar-DEMO";
+  src: url("../fonts/Collingar-DEMO") format("opentype");
 }
 
 :root {
-    --gold: #D4AF37;
-    --dark-gold: #B8941F;
-    --dark: #1a1a1a;
-    --light: #f8f9fa;
+  --gold: #d4af37;
+  --dark-gold: #b8941f;
+  --dark: #1a1a1a;
+  --light: #f8f9fa;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --secondary-gradient: linear-gradient(45deg, #101010, #473904);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}   
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    background-color: #1a1a1a;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: #1a1a1a;
 }
 
 /* Navigation */
 
 .navbar {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: background 0.3s ease; /* smooth effect */
-    
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease; /* smooth effect */
 }
 
 /* Initial Transparent Navbar */
 .my-navbar {
-    background: transparent;
-    transition: background 0.4s ease, backdrop-filter 0.4s ease, color 0.4s ease;
-    padding: 0px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius:50px ;
+  background: transparent;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, color 0.4s ease;
+  padding: 0px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 /* Change nav link colors when scrolled */
 .my-navbar.scrolled .nav-link {
-    color: rgb(0, 0, 0) !important;
-    transition: color 0.4s ease;
+  color: rgb(0, 0, 0) !important;
+  transition: color 0.4s ease;
 }
 
 /* Optional: Make nav link color darker when not scrolled */
 .my-navbar .nav-link {
-    color: rgb(255, 255, 255) !important;
-    transition: color 0.4s ease;
-
+  color: rgb(255, 255, 255) !important;
+  transition: color 0.4s ease;
 }
 
-.logo-img{
-    width: 100px;
-
+.logo-img {
+  width: 100px;
 }
-
-
 
 .navbar.scrolled .crown-icon {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .navbar-nav .nav-link {
-    color: white !important;
-    font-weight: 500;
-    margin: 0 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    text-transform: capitalize;
-    position: relative;
+  color: white !important;
+  font-weight: 500;
+  margin: 0 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  position: relative;
 }
 
 .navbar-nav .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gold);
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 .navbar-nav .nav-link:hover {
-    color: var(--gold) !important;
+  color: var(--gold) !important;
 }
 
 .btn-login {
-    /* background: var(--gold); */
-    border: 2px solid var(--gold);
-    padding: 6px 30px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  /* background: var(--gold); */
+  border: 2px solid var(--gold);
+  padding: 6px 30px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 /* .btn-login:hover {
@@ -117,305 +120,442 @@ body {
 
 /* Hero Section with VideoBackground */
 .hero-section {
-    height: 120vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 120vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90%;
-    object-fit: cover;
-    z-index: -1;
-   
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: -1;
-   
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
 }
 
 .hero-content {
-    text-align: center;
-    color: white;
-    z-index: 2;
-    width: 100%;
-    padding: 0 20px;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .hero-title {
-    font-family: 'Higuen Serif', serif;
-    font-size: 5rem;
-    font-weight: 700;
-    color: var(--gold);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-bottom: 1.5rem;
-    animation: fadeInUp 1s ease-out;
-    letter-spacing: 2px;
+  font-family: "Higuen Serif", serif;
+  font-size: 5rem;
+  font-weight: 700;
+  text-align: start;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.1rem;
+  animation: fadeInUp 1s ease-out;
+  letter-spacing: 2px;
 }
 
 .hero-subtitle {
-    font-size: 20px;
-    margin-bottom: 2rem;
-    color: #f8f9fa;
-    animation: fadeInUp 1s ease-out 0.3s both;
-    bottom: 0;
-    margin-top: 300px;
-    align-items: start;
-    text-align: left;
-}
-
-/* Booking Section */
-.booking-section {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 3;
-    padding: 0 20px;
-    transform: translateY(50%);
-}
-
-.booking-form-horizontal {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    max-width: 1200px;
-    margin: 0 auto;
-    transition: all 0.5s ease;
-}
-
-.booking-form-horizontal:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transform: translateY(-5px);
-}
-
-.form-row {
-    display: flex;
-    gap: 15px;
-    align-items: end;
-    flex-wrap: wrap;
-}
-
-.form-group {
-    flex: 1;
-    min-width: 200px;
-}
-
-.search-group {
-    flex: 0 0 auto;
-    min-width: 140px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--gold);
-    margin-bottom: 5px;
-}
-
-.form-control, .form-select {
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 12px 15px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    background: white;
-    width: 100%;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
-    outline: none;
-}
-
-.date-display {
-    display: block;
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 2px;
-}
-
-.btn-search {
-    background: var(--dark);
-    border: none;
-    color: white;
-    font-weight: 600;
-    padding: 12px 25px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-search:hover {
-    background: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-.btn-search {
-    background:#3e2758;
-    border: none;
-    color: white;
-    font-weight: 600;
-    padding: 12px 25px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
-}
-.btn-search:hover {
-    background:#bd83ba;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: #1a1a1a;
-}
-
-.form-extras {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.star-rating-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.star-rating-section label {
-    margin: 0;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.star-rating {
-    display: flex;
-    gap: 8px;
-}
-
-.star {
-    color: var(--gold);
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.star:hover {
-    background: rgba(212, 175, 55, 0.1);
+  font-family: "Higuen Serif", serif;
+  font-size: 15px;
+  margin-bottom: 2rem;
+  color: #f8f9fa;
+  animation: fadeInUp 1s ease-out 0.3s both;
+  text-align: left;
 }
 
 /* Animations */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* Responsive */
 @media (max-width: 992px) {
-    .hero-title {
-        font-size: 4rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.5rem;
-    }
+  .hero-title {
+    font-size: 4rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .booking-section {
-        position: relative;
-        bottom: auto;
-        margin-top: 2rem;
-        transform: none;
-        padding: 20px;
-    }
-    
-    .booking-form-horizontal {
-        margin: 0;
-        padding: 15px;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .form-group {
-        min-width: 100%;
-    }
-    
-    .form-extras {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .star-rating-section {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .booking-section {
+    position: relative;
+    bottom: auto;
+    margin-top: 2rem;
+    transform: none;
+    padding: 20px;
+  }
+
+  .booking-form-horizontal {
+    margin: 0;
+    padding: 15px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-group {
+    min-width: 100%;
+  }
+
+  .form-extras {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .star-rating-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 576px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .navbar-brand {
-        font-size: 1.5rem;
-    }
-    
-    
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+}
+
+.roomify-form-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.roomify-form-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: rotate 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.roomify-form-title {
+  text-align: center;
+  color: var(--dark-gold);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.roomify-form-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.roomify-form-label {
+  color: var(--dark-gold);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roomify-form-input,
+.roomify-form-select {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--dark-gold);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+}
+
+.roomify-form-input:focus,
+.roomify-form-select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+  color: var(--dark-gold);
+  transform: translateY(-2px);
+}
+
+.roomify-form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.roomify-form-select option {
+  background: #333;
+  color: white;
+}
+
+.roomify-guest-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  backdrop-filter: blur(10px);
+}
+
+.roomify-guest-type {
+  color: var(--light);
+  font-weight: 500;
+}
+
+.roomify-counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.roomify-counter-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: var(--light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.roomify-counter-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.roomify-counter-btn:active {
+  transform: scale(0.95);
+}
+
+.roomify-counter-value {
+  color: var(--light);
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.roomify-btn-search {
+  background: var(--secondary-gradient);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roomify-btn-search1 {
+  background: var(--secondary-gradient);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 50%;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roomify-btn-search::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.roomify-btn-search:hover::before {
+  left: 100%;
+}
+
+.roomify-btn-search:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.roomify-btn-search:active {
+  transform: translateY(-1px);
+}
+
+.date-row {
+  display: flex;
+  gap: 15px;
+}
+
+.date-row .roomify-form-group {
+  flex: 1;
+}
+
+.roomify-success-message {
+  background: rgba(40, 167, 69, 0.2);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  border-radius: 15px;
+  padding: 15px;
+  color: #28a745;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.roomify-error-message {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 15px;
+  padding: 15px;
+  color: #dc3545;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading .roomify-btn-search {
+  background: #6c757d;
+}
+
+@media (max-width: 576px) {
+  .roomify-form-container {
+    padding: 25px;
+    margin: 10px;
+  }
+
+  .date-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .roomify-form-title {
+    font-size: 2rem;
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  15% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.button-jumping {
+  animation: jump 2s ease-in-out infinite;
+  animation-play-state: running;
+  /* Repeat every 5 seconds (0.8s animation + 4.2s pause) */
+  animation-delay: 0s, 10s;
+}
+
+/* Optional: Pause animation on hover */
+.button-jumping:hover {
+  animation: jump 0.8s ease-in-out infinite paused;
 }
 /*  */
