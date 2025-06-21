@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carousel Dynamique - Destinations</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="../css/section2.css" rel ="stylesheet">    
+    <link href="../css/section2.css" rel="stylesheet">
 
 </head>
+
 <body>
     <div class="carousel-container">
         <!-- Main Carousel -->
@@ -18,7 +20,7 @@
                 <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="2"></button>
             </div>
-            
+
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="row g-4">
@@ -57,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="carousel-item">
                     <div class="row g-4">
                         <div class="col-md-4">
@@ -95,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="carousel-item">
                     <div class="row g-4">
                         <div class="col-md-4">
@@ -134,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
@@ -159,8 +161,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         // Dynamic functionality
-        const destinations = [
-            {
+        const destinations = [{
                 name: 'Casablanca',
                 price: '1200',
                 rating: '4.8',
@@ -219,7 +220,7 @@
         // Reservation function
         function reserveDestination(destinationName) {
             const destination = destinations.find(d => d.name === destinationName);
-            
+
             if (destination) {
                 // Create dynamic modal or alert
                 const modal = document.createElement('div');
@@ -265,11 +266,11 @@
                         </div>
                     </div>
                 `;
-                
+
                 document.body.appendChild(modal);
                 const bootstrapModal = new bootstrap.Modal(document.getElementById('reservationModal'));
                 bootstrapModal.show();
-                
+
                 // Clean up modal after hiding
                 document.getElementById('reservationModal').addEventListener('hidden.bs.modal', function() {
                     document.body.removeChild(modal);
@@ -282,7 +283,7 @@
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('reservationModal'));
             modal.hide();
-            
+
             // Show success message
             setTimeout(() => {
                 showSuccessMessage(`Réservation confirmée pour ${destinationName}! Vous recevrez un email de confirmation.`);
@@ -303,9 +304,9 @@
                 <i class="fas fa-check-circle me-2"></i>${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
-            
+
             document.body.appendChild(alert);
-            
+
             // Auto remove after 5 seconds
             setTimeout(() => {
                 if (alert.parentNode) {
@@ -313,41 +314,4 @@
                 }
             }, 5000);
         }
-
-        // Add smooth scrolling and enhanced interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add hover effects to carousel items
-            const carouselItems = document.querySelectorAll('.destination-card');
-            carouselItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            // Add dynamic content loading
-            const carousel = document.getElementById('destinationCarousel');
-            carousel.addEventListener('slide.bs.carousel', function(e) {
-                // Add slide animation effects
-                const activeItem = e.relatedTarget;
-                const cards = activeItem.querySelectorAll('.destination-card');
-                
-                cards.forEach((card, index) => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(30px)';
-                    
-                    setTimeout(() => {
-                        card.style.transition = 'all 0.6s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 200);
-                });
-            });
-
-            // Add typing effect to promo banner
-            const promoTitle = document.querySelector('.promo-title');
-            const originalText = promoTitle.textContent;
-            let index =
+    </script>
