@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../css/backgroundAnimated.css">
 
     <style>
+
         body {
             background-image: url('../../assets/backgroundLogin.png');
             background-attachment: fixed;
@@ -17,26 +18,18 @@
             background-repeat: no-repeat;
             background-size: cover;
             font-family: 'Arial', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .login-container {
             background: rgba(74, 74, 74, 0.2);
-            /* Semi-transparent background */
             backdrop-filter: blur(10px);
-            /* Creates the frosted glass effect */
             -webkit-backdrop-filter: blur(10px);
-            /* For Safari */
             border-radius: 20px;
             padding: 40px 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 400px;
             border: 1px solid rgba(85, 85, 85, 0.3);
-            /* Semi-transparent border */
             z-index: 9999;
             position: relative;
             overflow: hidden;
@@ -53,7 +46,6 @@
             filter: blur(8px);
             z-index: -1;
             margin: -20px;
-            /* Expands the blur area */
         }
 
         .logo-section {
@@ -153,34 +145,40 @@
     </style>
 </head>
 
-<body class="cosmic-starfield-wrapper" id="cosmicWrapper">
+<body>
 
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="login-container ">
-            <!-- Logo Section -->
-            <div class="d-flex flex-column align-items-center">
-                <img src="../../assets/logo.png" alt="logo" class="img-fluid logo-section">
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-0 border-0 bg-transparent">
+                <div class="login-container">
+                    <!-- Logo Section -->
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="../../assets/logo.png" alt="logo" class="img-fluid logo-section">
+                    </div>
+
+                    <!-- Login Title -->
+                    <h2 class="login-title">LOGIN</h2>
+
+                    <!-- Login Form -->
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <i class="fas fa-lock lock-icon"></i>LOGIN
+                        </button>
+                    </form>
+                </div>
             </div>
-
-            <!-- Login Title -->
-            <h2 class="login-title">LOGIN</h2>
-
-            <!-- Login Form -->
-            <form id="loginForm">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required>
-                </div>
-
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-lock lock-icon"></i>LOGIN
-                </button>
-            </form>
         </div>
     </div>
+
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
