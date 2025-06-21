@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../css/section3.css">
+    <link rel="stylesheet" href="../../css/section3.css">
 
 </head>
 
@@ -31,7 +31,7 @@
                 <div class=" col-md-4">
                     <div class="hotel-card-section3" data-aos="fade-up">
                         <div class="card-image-container-section3">
-                            <img src="../assets/hotel1.png" alt="firsthotel" class="card-hotel">
+                            <img src="../../assets/hotel1.png" alt="firsthotel" class="card-hotel">
                             <div class="card-overlay-section3"></div>
                             <div class="card-content-section3">
                                 <div>
@@ -62,7 +62,7 @@
                 <div class=" col-md-4">
                     <div class="hotel-card-section3" data-aos="fade-up">
                         <div class="card-image-container-section3">
-                            <img src="../assets/hotel2.png" alt="firsthotel" class="card-hotel">
+                            <img src="../../assets/hotel2.png" alt="firsthotel" class="card-hotel">
                             <div class="card-overlay-section3"></div>
                             <div class="card-content-section3">
                                 <div>
@@ -93,7 +93,7 @@
                 <div class=" col-md-4">
                     <div class="hotel-card-section3" data-aos="fade-up">
                         <div class="card-image-container-section3">
-                            <img src="../assets/hotel3.png" alt="firsthotel" class="card-hotel">
+                            <img src="../../assets/hotel3.png" alt="firsthotel" class="card-hotel">
                             <div class="card-overlay-section3"></div>
                             <div class="card-content-section3">
                                 <div>

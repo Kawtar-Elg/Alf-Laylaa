@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="../css/section2.css">
+        <link rel="stylesheet" href="../../css/section2.css">
         
 </head>
 
@@ -29,7 +29,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="hotel-card-section2" data-aos="fade-up">
                         <div class="card-image-container-section2">
-                            <img src="../assets/casaNight.jpg" alt="CasaBlanca Hotel" class="card-image">
+                            <img src="../../assets/casaNight.jpg" alt="CasaBlanca Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
                             <button class="favorite-btn" onclick="toggleFavorite(this)">
                                 <i class="far fa-heart"></i>
@@ -52,7 +52,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="hotel-card-section2" data-aos="fade-up">
                         <div class="card-image-container-section2">
-                            <img src="../assets/paris.jpg" alt="Paris Hotel" class="card-image">
+                            <img src="../../assets/paris.jpg" alt="Paris Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
                             <button class="favorite-btn" onclick="toggleFavorite(this)">
                                 <i class="far fa-heart"></i>
@@ -75,7 +75,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="hotel-card-section2" data-aos="fade-up">
                         <div class="card-image-container-section2">
-                            <img src="../assets/balii.jpg"
+                            <img src="../../assets/balii.jpg"
                                 alt="Bali Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
                             <button class="favorite-btn" onclick="toggleFavorite(this)">
@@ -101,6 +101,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 </body>
-<script src="../js/section2.js"></script>
+<script src="../../js/section2.js"></script>
 
 </html>

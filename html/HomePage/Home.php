@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
 
-  <link href="../css/section1.css" rel="stylesheet" />
+  <link href="../../css/section1.css" rel="stylesheet" />
 
   <!-- Bootstrap CSS -->
   <link
@@ -31,7 +31,7 @@
       <div
         class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">
-          <img src="../assets/logo.png" alt="Logo" class="logo-img" />
+          <img src="../../assets/logo.png" alt="Logo" class="logo-img" />
         </a>
         <div
           class="collapse navbar-collapse justify-content-center"
@@ -67,7 +67,7 @@
   <section id="home" class="hero-section">
     <!-- Video Background -->
     <video autoplay muted loop class="video-background">
-      <source src="../assets/video1.mp4" type="video/mp4" />
+      <source src="../../assets/video1.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <!-- Dark overlay -->
@@ -231,7 +231,7 @@
 
 </body>
 
-<script src="../js/section1.js"></script>
+<script src="../../js/section1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
