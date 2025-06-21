@@ -18,10 +18,13 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     rel="stylesheet" />
 
-
 </head>
 
 <body>
+  <div class="loading-overlay-section3" id="loadingOverlay">
+    <div class="spinner-section3"></div>
+  </div>
+
   <header>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top my-navbar">
@@ -59,6 +62,7 @@
       </div>
     </nav>
   </header>
+
 
   <section id="home" class="hero-section">
     <!-- Video Background -->
@@ -219,11 +223,10 @@
     </div>
   </section>
 
-<div id="sectionWrapper">
-  <?php include 'section3.php'; ?>
-</div>
 
-<div class="cosmic-starfield-wrapper" id="cosmicWrapper"></div>
+  <?php include 'section2.php'; ?>
+
+  <?php include 'section3.php'; ?>
 
 
 </body>
