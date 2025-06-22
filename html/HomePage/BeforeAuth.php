@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['user_name'])) {
-    header("Location: BeforeAuth.php");
-    exit();
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,46 +25,7 @@ if (!isset($_SESSION['user_name'])) {
     <div class="spinner-section3"></div>
   </div>
 
-  <header>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top my-navbar">
-      <div
-        class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#">
-          <img src="../../assets/logo.png" alt="Logo" class="logo-img" />
-        </a>
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav">
-          <ul class="navbar-nav d-flex gap-4">
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#hotels">Our Hotels</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#reviews">Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-          <span class="text-light">👋 Welcome , <strong><?php echo $_SESSION['user_name']; ?></strong></span>
-          <img src="../../assets/user-icon.png" alt="Profile" class="rounded-circle" style="width: 32px; height: 32px;" />
-          <form action="../LoginSysteme/logout.php" method="post">
-            <button class="btn btn-sm btn-danger" type="submit">Sign Out</button>
-          </form>
-        </div>
-
-      </div>
-    </nav>
-  </header>
+  <?php include 'header.php'; ?>
 
   <section id="home" class="hero-section">
     <!-- Video Background -->

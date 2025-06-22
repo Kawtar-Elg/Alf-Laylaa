@@ -1,24 +1,23 @@
- <!DOCTYPE html>
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
- <head>
-     <meta charset="UTF-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Home</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
 
-     <link href="../../css/section1.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="../../css/section1.css" rel="stylesheet" />
 
-     <!-- Bootstrap CSS -->
-     <link
-         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
-         rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
 
      <!-- Font Awesome -->
      <link
          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
          rel="stylesheet" />
 
-         <?php include '../LoginSysteme/SignIn.php'; ?>
+         <?php include '../LoginSysteme/SignIn.html'; ?>
          <?php include '../LoginSysteme/SignUp.html'; ?>
          
      <header>
