@@ -19,7 +19,7 @@
          rel="stylesheet" />
 
          <?php include '../LoginSysteme/SignIn.php'; ?>
-         <?php include '../LoginSysteme/SignUp.php'; ?>
+         <?php include '../LoginSysteme/SignUp.html'; ?>
          
      <header>
          <!-- Navigation -->
