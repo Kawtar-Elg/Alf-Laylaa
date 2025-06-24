@@ -39,7 +39,7 @@
                              <a class="nav-link" href="#about">About Us</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="#hotels">Our Hotels</a>
+                             <a class="nav-link" href="#rtl">Our Hotels</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link" href="#reviews">Reviews</a>
