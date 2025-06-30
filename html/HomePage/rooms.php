@@ -1,9 +1,33 @@
 <?php
 session_start();
-require_once 'config/auth.php';
-require_once 'config/database.php';
+require_once '../../config/auth.php';
+require_once '../../config/database.php';
 
-$rooms = getAllRooms();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hotelId = $_POST['hotel_id'] ?? null;
+
+    if ($hotelId !== null) {
+        $_SESSION['selected_hotel_id'] = $hotelId;
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Hotel ID saved in session.',
+            'stored_id' => $hotelId
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Missing hotel_id']);
+    }
+    exit;
+}
+
+if (isset($_SESSION['selected_hotel_id'])) {
+    $hotel_id = $_SESSION['selected_hotel_id'];
+    $rooms = getRoomsByHotelId($hotel_id);
+} else {
+    echo "Aucun hôtel sélectionné.";
+}
+
 $categories = array_unique(array_column($rooms, 'type'));
 $price_ranges = [
     'all' => 'All Prices',

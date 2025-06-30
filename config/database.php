@@ -1,9 +1,9 @@
 <?php
-$host = "127.0.0.1";        
-$port = 3308; 
-$dbname = "alf-laylaa";      
-$username = "root";          
-$password = "";            
+$host = "127.0.0.1";
+$port = 3308;
+$dbname = "alf-laylaa";
+$username = "root";
+$password = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $username, $password);
@@ -47,15 +47,23 @@ class Database
     }
 }
 
-// Room management functions
-function getAllRooms()
+function getRoomsByHotelId($hotel_id = 0)
 {
     $db = Database::getConnection();
-    $stmt = $db->prepare("SELECT * FROM rooms ORDER BY price ASC");
-    $stmt->execute();
-    $rooms = $stmt->fetchAll();
 
-    // Parse JSON fields
+    if ($hotel_id === 0) {
+        // Get all rooms
+        $stmt = $db->prepare("SELECT * FROM rooms ORDER BY price ASC");
+        $stmt->execute();
+    } else {
+        // Get only rooms for the specified hotel
+        $stmt = $db->prepare("SELECT * FROM rooms WHERE hotel_id = ? ORDER BY price ASC");
+        $stmt->bindValue(1, $hotel_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     foreach ($rooms as &$room) {
         $room['images'] = json_decode($room['images'], true) ?? [];
         $room['amenities'] = json_decode($room['amenities'], true) ?? [];

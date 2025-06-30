@@ -56,11 +56,12 @@ function loadHotelsForCity(cityId, cityName) {
                             </button>
                         </div>
                         <div class="card-content-section3">
-                            <a href="#sousListHeader" class="view-btn-section3" onclick="viewHotelDetails('${
+                            <a href="#" class="view-btn-section3" onclick="storeHotelIdInSession('${
                               hotel.id
                             }')">
-                                Tout voir <i class="fas fa-arrow-right"></i>
+                              Tout voir <i class="fas fa-arrow-right"></i>
                             </a>
+
                         </div>
                     </div>
                 `;
@@ -80,35 +81,53 @@ function loadHotelsForCity(cityId, cityName) {
     });
 }
 
-function viewHotelDetails(hotelId) {
-  const sousListRooms = document.getElementById("sousListRooms");
-  const sousListHeader = document.getElementById("sousListHeader");
-  const sousListServices = document.getElementById("sousListServices");
+function storeHotelIdInSession(hotelId) {
+  // Send hotel ID to PHP via AJAX
+  fetch("../../html/HomePage/SousList.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: `hotel_id=${hotelId}`,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log("Hotel ID stored:", data.stored_id);
 
-  if (sousListRooms.style.display === "none") {
-    sousListRooms.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListRooms.style.display = "block";
-  }
+        const sousListRooms = document.getElementById("sousListRooms");
+        const sousListHeader = document.getElementById("sousListHeader");
+        const sousListServices = document.getElementById("sousListServices");
 
-  if (sousListHeader.style.display === "none") {
-    sousListHeader.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListHeader.style.display = "block";
-  }
+        if (sousListRooms.style.display === "none") {
+          sousListRooms.style.display = "none";
+        } else {
+          sousListRooms.style.display = "block";
+        }
 
-  if (sousListServices.style.display === "none") {
-    sousListServices.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListServices.style.display = "block";
-  }
+        if (sousListHeader.style.display === "none") {
+          sousListHeader.style.display = "none";
+        } else {
+          sousListHeader.style.display = "block";
+        }
 
-  sousListServices.scrollIntoView({ behavior: "smooth" });
-  sousListHeader.scrollIntoView({ behavior: "smooth" });
-  sousListRooms.scrollIntoView({ behavior: "smooth" });
+        if (sousListServices.style.display === "none") {
+          sousListServices.style.display = "none";
+        } else {
+          sousListServices.style.display = "block";
+        }
+
+        sousListServices.scrollIntoView({ behavior: "smooth" });
+        sousListHeader.scrollIntoView({ behavior: "smooth" });
+        sousListRooms.scrollIntoView({ behavior: "smooth" });
+
+      } else {
+        console.error("Erreur :", data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Erreur réseau :", error);
+    });
 }
 
 function backToCities() {

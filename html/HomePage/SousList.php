@@ -1,16 +1,36 @@
 <?php
 require '../../config/auth.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hotelId = $_POST['hotel_id'] ?? null;
 
-$rooms = getAllRooms();
-$featured_rooms = array_slice($rooms, 0, 3);
+    if ($hotelId !== null) {
+        $_SESSION['selected_hotel_id'] = $hotelId;
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Hotel ID saved in session.',
+            'stored_id' => $hotelId
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Missing hotel_id']);
+    }
+    exit;
+}
+
+if (isset($_SESSION['selected_hotel_id'])) {
+    $hotel_id = $_SESSION['selected_hotel_id'];
+    $rooms = getRoomsByHotelId($hotel_id);
+    $featured_rooms = array_slice($rooms, 0, 3);
+} else {
+    echo "Aucun hôtel sélectionné.";
+}
 
 ?>
 
 <?php include 'SousListHeader.php'; ?>
 
 <!-- Featured Rooms Section -->
-
 
 <section class="featured-rooms py-5" id="sousListRooms">
     <div class="container">
