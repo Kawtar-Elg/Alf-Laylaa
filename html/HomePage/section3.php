@@ -10,7 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../../css/section3.css">
 
 </head>
 
@@ -19,105 +18,15 @@
     <div class="bg-animation" id="bgAnimation"></div>
 
     <!-- Hotels Grid -->
-    <section class="hotels-grid-section3">
-        <div class="container">
-            <h1 class="hero-title-section3 text-center py-5">Discover the Best Hotels in Morocco !</h1>
-            <p class="hero-subtitle-section3 text-center">iscount Découvrer notre iscount Découviscount Découvrer notiscoun
-                t Découviscount Découvrer notre Hotele !rer notre Hotele !re Hotele !rer notre
-                Hotele !Hotele !</p>
+    <section class="hotels-grid-section3 mt-5">
+        <div class="container mt-5">
+            <h1 class="hero-title-section3 text-center" id="hotelsSectionTitle"></h1>
+            <p class="hero-subtitle-section3 text-center">Profitez d’un séjour inoubliable à Agadir dans des hôtels sélectionnés pour leur confort, leur vue sur l’océan et leur proximité avec la plage. Que ce soit pour des vacances en famille, une escapade romantique ou un voyage d'affaires, trouvez l’hébergement idéal au meilleur prix.</p>
             <div class="row">
+                <div id="hotelsSection" class="container" style="display: none;">
+                    <h4 class="text-white mb-4"></h4>
+                    <div id="hotelsGrid" class="row g-4 justify-content-center"></div>
 
-                <!-- FIRST HOTEL -->
-                <div class=" col-md-4">
-                    <div class="hotel-card-section3" data-aos="fade-up">
-                        <div class="card-image-container-section3">
-                            <img src="../../assets/hotel1.png" alt="firsthotel" class="card-hotel">
-                            <div class="card-overlay-section3"></div>
-                            <div class="card-content-section3">
-                                <div>
-                                    <h2 class="card-title">Barcélo </h2>
-                                </div>
-                                <div style="color: gold;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Paris Card -->
-                <div class=" col-md-4">
-                    <div class="hotel-card-section3" data-aos="fade-up">
-                        <div class="card-image-container-section3">
-                            <img src="../../assets/hotel2.png" alt="firsthotel" class="card-hotel">
-                            <div class="card-overlay-section3"></div>
-                            <div class="card-content-section3">
-                                <div>
-                                    <h2 class="card-title"> Ibis Casa Blanca</h2>
-                                </div>
-                                <div style="color: gold;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bali Card -->
-                <div class=" col-md-4">
-                    <div class="hotel-card-section3" data-aos="fade-up">
-                        <div class="card-image-container-section3">
-                            <img src="../../assets/hotel3.png" alt="firsthotel" class="card-hotel">
-                            <div class="card-overlay-section3"></div>
-                            <div class="card-content-section3">
-                                <div>
-                                    <h2 class="card-title">Hilton Garden lnn</h2>
-                                </div>
-                                <div style="color: gold;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

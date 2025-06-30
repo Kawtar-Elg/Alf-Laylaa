@@ -25,16 +25,9 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  background-color: #1a1a1a;
-}
-
 /* Navigation */
 
-.navbar {
+.navbar-home {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

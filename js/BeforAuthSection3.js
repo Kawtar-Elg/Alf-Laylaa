@@ -4,7 +4,7 @@ function loadHotelsForCity(cityId, cityName) {
     return;
   }
 
-  fetch(`../../config/get_hotels.php?city_id=${cityId}`)
+  fetch(`config/get_hotels.php?city_id=${cityId}`)
     .then((res) => {
       if (!res.ok) {
         throw new Error("Erreur réseau");
@@ -24,7 +24,7 @@ function loadHotelsForCity(cityId, cityName) {
       // Afficher le titre de la section
       const sectionTitle = document.getElementById("hotelsSectionTitle");
       if (sectionTitle) {
-        sectionTitle.textContent = `Discover the Best Hotels in ${cityName} ! `;
+        sectionTitle.textContent = `Hôtels à ${cityName}`;
       }
 
       // Vider le conteneur
@@ -39,11 +39,12 @@ function loadHotelsForCity(cityId, cityName) {
                     <div class="hotel-card-section3" data-aos="fade-up">
                         <div class="card-image-container-section3">
                             <img src="${
-                              hotel.image_url || "../../assets/land.jpg"
+                              hotel.image_url ||
+                              "public/defaultl.jpg"
                             }"
                                  alt="${hotel.name}"
                                  class="card-hotel"
-                                 onerror="this.src='../../assets/land.jpg'">
+                                 onerror="this.src='public/default.jpg'">
                             <div class="card-overlay-section3"></div>
                             <div class="card-content-section3">
                                 <h2 class="card-title">${hotel.name}</h2>
@@ -56,7 +57,7 @@ function loadHotelsForCity(cityId, cityName) {
                             </button>
                         </div>
                         <div class="card-content-section3">
-                            <a href="#sousListHeader" class="view-btn-section3" onclick="viewHotelDetails('${
+                            <a href="#" class="view-btn-section3" onclick="viewHotelDetails('${
                               hotel.id
                             }')">
                                 Tout voir <i class="fas fa-arrow-right"></i>
@@ -81,34 +82,9 @@ function loadHotelsForCity(cityId, cityName) {
 }
 
 function viewHotelDetails(hotelId) {
-  const sousListRooms = document.getElementById("sousListRooms");
-  const sousListHeader = document.getElementById("sousListHeader");
-  const sousListServices = document.getElementById("sousListServices");
-
-  if (sousListRooms.style.display === "none") {
-    sousListRooms.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListRooms.style.display = "block";
-  }
-
-  if (sousListHeader.style.display === "none") {
-    sousListHeader.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListHeader.style.display = "block";
-  }
-
-  if (sousListServices.style.display === "none") {
-    sousListServices.style.display = "none";
-  } else {
-    console.log("Viewing hotel details for hotel ID:", hotelId);
-    sousListServices.style.display = "block";
-  }
-
-  sousListServices.scrollIntoView({ behavior: "smooth" });
-  sousListHeader.scrollIntoView({ behavior: "smooth" });
-  sousListRooms.scrollIntoView({ behavior: "smooth" });
+  // You can implement hotel details page here
+  console.log("Viewing hotel details for hotel ID:", hotelId);
+  // Example: window.location.href = `hotel-details.html?id=${hotelId}`;
 }
 
 function backToCities() {

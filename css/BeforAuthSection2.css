@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background: black;
+}
+
 /* Animated background particles */
 .bg-animation {
   position: fixed;
@@ -335,4 +339,3 @@
     transform: rotate(360deg);
   }
 }
-

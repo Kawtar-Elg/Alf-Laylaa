@@ -691,3 +691,11 @@
 <script src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 
 </html>
+
+
+
+echo "<h2>Liste des utilisateurs</h2>";
+foreach ($users as $user) {
+    echo "📧 Email : " . $user['email'] . "<br>";
+}
+?>

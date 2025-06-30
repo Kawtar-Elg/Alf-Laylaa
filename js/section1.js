@@ -8,3 +8,9 @@ function updateCounter(type, delta) {
     inputElement.value = current;
   }
 }
+
+window.addEventListener("load", function () {
+  setTimeout(() => {
+    document.getElementById("loadingOverlay").classList.add("hidden");
+  }, 1500);
+});

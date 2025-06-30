@@ -10,14 +10,41 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="../../css/section2.css">
-        
+
+    <style>
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            font-size: 2rem;
+            color: var(--primary-gold);
+            z-index: 10;
+            cursor: pointer;
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .carousel-btn:disabled {
+            color: #ccc !important;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .left-btn {
+            left: -5rem;
+        }
+
+        .right-btn {
+            right: -5rem;
+        }
+    </style>
+
 </head>
 
 <body>
-    <!-- Loading overlay -->
-    
-    <!-- Animated background -->
+
+    <!-- Animated Background -->
     <div class="bg-animation" id="bgAnimation"></div>
 
     <!-- Hotels Grid -->
@@ -25,73 +52,16 @@
         <div class="container">
             <h1 class="hero-title-section2 text-center py-5">Discover the Best Hotels in Morocco !</h1>
             <div class="row">
-                <!-- Casa Blanca Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="hotel-card-section2" data-aos="fade-up">
-                        <div class="card-image-container-section2">
-                            <img src="../../assets/casaNight.jpg" alt="CasaBlanca Hotel" class="card-image">
-                            <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section2">
-                            <h3 class="destination-name-section2">
-                                Casa Blanca
-                                <img src="https://flagcdn.com/w40/ma.png" alt="Morocco Flag" class="country-flag">
-                            </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('CasaBlanca')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <div class="position-relative">
+                    <button id="prevBtn" class="carousel-btn left-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
 
-                <!-- Paris Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="hotel-card-section2" data-aos="fade-up">
-                        <div class="card-image-container-section2">
-                            <img src="../../assets/paris.jpg" alt="Paris Hotel" class="card-image">
-                            <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section2">
-                            <h3 class="destination-name-section2">
-                                Paris
-                                <img src="https://flagcdn.com/w40/fr.png" alt="France Flag" class="country-flag">
-                            </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('Paris')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <button id="nextBtn" class="carousel-btn right-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
 
-                <!-- Bali Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="hotel-card-section2" data-aos="fade-up">
-                        <div class="card-image-container-section2">
-                            <img src="../../assets/balii.jpg"
-                                alt="Bali Hotel" class="card-image">
-                            <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="card-content-section2">
-                            <h3 class="destination-name-section2">
-                                Bali
-                                <img src="https://flagcdn.com/w40/id.png" alt="Indonesia Flag" class="country-flag">
-                            </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('Bali')">
-                                Tout voir
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
+                    <div id="cityCarousel" class="row g-4 justify-content-center">
                     </div>
                 </div>
             </div>
@@ -101,6 +71,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 </body>
-<script src="../../js/section2.js"></script>
 
 </html>

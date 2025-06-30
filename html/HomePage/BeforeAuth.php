@@ -13,10 +13,14 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
     rel="stylesheet" />
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Font Awesome -->
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     rel="stylesheet" />
+
+
 
 </head>
 
@@ -25,7 +29,7 @@
     <div class="spinner-section3"></div>
   </div>
 
-  <?php include 'header.php'; ?>
+  <?php include 'BeforAuthHeader.php'; ?>
 
   <section id="home" class="hero-section">
     <!-- Video Background -->
@@ -186,10 +190,13 @@
     </div>
   </section>
 
+  <?php include 'section4.php'; ?>
 
-  <?php include 'section2.php'; ?>
+  <?php include 'BeforAuthSection2.php'; ?>
 
-  <?php include 'section3.php'; ?>
+  <?php include 'BeforAuthSection3.php'; ?>
+
+  <?php include 'BeforAuthFooter.php'; ?>
 
 
 </body>

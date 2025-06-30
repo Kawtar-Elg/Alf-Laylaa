@@ -1,0 +1,405 @@
+/* Root Variables */
+:root {
+    --golden-primary: #ffd700;
+    --golden-secondary: #e6c200;
+    --golden-light: #fff8dc;
+    --golden-glow: 0 0 10px rgba(255, 215, 0, 0.6);
+    --dark-bg: #2c2c2c;
+    --light-gray: #f8f9fa;
+    --text-primary: #fff;
+    --text-secondary: #eee;
+    --white: #ffffff;
+    --transition: all 0.3s ease-in-out;
+}
+
+.dark-background{
+    background: black;
+}
+
+/* Hero Section */
+.hero-section4 {
+    background: none;
+    position: relative;
+}
+
+/* Image Container */
+.image-container {
+    position: relative;
+    z-index: 2;
+}
+
+.main-image-wrapper {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.main-hotel-image {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.main-hotel-image:hover {
+    transform: scale(1.02);
+}
+
+/* Golden Accent Box */
+.golden-accent-box {
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, var(--golden-primary) 0%, var(--golden-secondary) 100%);
+    border-radius: 15px;
+    box-shadow: var(--golden-glow);
+    z-index: -1;
+    animation: rotateSlow 10s ease-in-out infinite;
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Experience Badge */
+.experience-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--dark-bg);
+    color: var(--white);
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(188, 154, 1, 0.3);
+    z-index: 3;
+    min-width: 200px;
+    text-align: center;
+}
+
+.badge-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--golden-primary);
+    text-shadow: var(--golden-glow);
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.badge-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Dots Pattern */
+.dots-pattern {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 100px;
+    height: 100px;
+    background-image: radial-gradient(circle, var(--golden-primary) 2px, transparent 2px);
+    background-size: 15px 15px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Content Styles */
+.content-wrapper {
+    padding: 20px 0;
+}
+
+.section-tag {
+    display: inline-block;
+    background: var(--golden-light);
+    color: var(--golden-secondary);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--golden-primary);
+}
+
+.main-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.highlight-text {
+    color: var(--golden-secondary);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.lead-paragraph {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.secondary-paragraph {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Golden Button */
+.btn-golden-s4 {
+    background: linear-gradient(135deg, var(--golden-primary) 0%, var(--golden-secondary) 100%);
+    border: none;
+    color: var(--dark-bg);
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    box-shadow: var(--golden-glow);
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-golden-s4:hover {
+    background: linear-gradient(135deg, var(--golden-secondary) 0%, var(--golden-primary) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    color: var(--dark-bg);
+}
+
+.btn-golden-s4:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    color: var(--dark-bg);
+}
+
+/* Features List */
+.features-list {
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.feature-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--golden-secondary);
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* Floating Action Button */
+.floating-action {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.btn-floating {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--golden-primary);
+    border: none;
+    color: var(--golden-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--golden-glow);
+    transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.btn-floating.visible {
+    opacity: 1;
+    visibility: visible;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--golden-primary);
+    border: none;
+    color: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--golden-glow);
+    transition: var(--transition);
+}
+
+.btn-floating:hover {
+    background: var(--dark-bg);
+    color: var(--golden-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .main-heading {
+        font-size: 2.2rem;
+    }
+    
+    .image-container {
+        margin-bottom: 3rem;
+    }
+    
+    .golden-accent-box {
+        width: 100px;
+        height: 100px;
+        top: -20px;
+        right: -20px;
+    }
+    
+    .experience-badge {
+        bottom: -15px;
+        left: -15px;
+        padding: 15px 20px;
+        min-width: 160px;
+    }
+    
+    .badge-number {
+        font-size: 2rem;
+    }
+    
+    .content-wrapper {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-heading {
+        font-size: 1.8rem;
+    }
+    
+    .lead-paragraph {
+        font-size: 1rem;
+    }
+    
+    .btn-golden {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+    
+    .experience-badge {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: 20px auto 0;
+        display: inline-block;
+    }
+    
+    .golden-accent-box {
+        display: none;
+    }
+    
+    .dots-pattern {
+        display: none;
+    }
+    
+    .floating-action {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .btn-floating {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .main-heading {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-tag {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .features-list .row {
+        gap: 0.5rem;
+    }
+    
+    .feature-item {
+        padding: 6px 0;
+        font-size: 0.9rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.btn-golden:focus,
+.btn-floating:focus {
+    outline: 2px solid var(--golden-primary);
+    outline-offset: 2px;
+}
+
+/* Animation classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

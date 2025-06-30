@@ -1,11 +1,3 @@
-// Loading animation
-window.addEventListener("load", function () {
-  setTimeout(() => {
-    document.getElementById("loadingOverlay").classList.add("hidden");
-  }, 1500);
-});
-
-// Create animated background particles
 function createParticles() {
   const bgAnimation = document.getElementById("bgAnimation");
   const particleCount = 30;
@@ -23,7 +15,6 @@ function createParticles() {
   }
 }
 
-// Toggle favorite functionality
 function toggleFavorite(btn) {
   const icon = btn.querySelector("i");
   btn.classList.toggle("active");
@@ -40,9 +31,7 @@ function toggleFavorite(btn) {
   }, 600);
 }
 
-// View destination functionality
 function viewDestination(destination) {
-  // Create a smooth fade effect
   document.body.style.transition = "opacity 0.3s ease";
   document.body.style.opacity = "0.8";
 
@@ -52,7 +41,6 @@ function viewDestination(destination) {
   }, 300);
 }
 
-// Smooth scroll reveal animation
 function revealOnScroll() {
   const cards = document.querySelectorAll(".hotel-card");
   const windowHeight = window.innerHeight;
@@ -68,7 +56,6 @@ function revealOnScroll() {
   });
 }
 
-// Mouse parallax effect
 function initParallax() {
   document.addEventListener("mousemove", (e) => {
     const cards = document.querySelectorAll(".hotel-card");
@@ -85,7 +72,6 @@ function initParallax() {
   });
 }
 
-// Add heartbeat animation keyframes
 const style = document.createElement("style");
 style.textContent = `
     @keyframes heartBeat {
@@ -98,13 +84,11 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize all animations
 document.addEventListener("DOMContentLoaded", function () {
   createParticles();
   window.addEventListener("scroll", revealOnScroll);
   initParallax();
 
-  // Add stagger animation to cards
   const cards = document.querySelectorAll(".hotel-card");
   cards.forEach((card, index) => {
     card.style.animationDelay = `${index * 0.2}s`;
@@ -113,35 +97,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const container = document.querySelector(".carousel-container");
   const track = document.querySelector(".carousel-track");
 
-  // 1. Clone content bach t9dr idir infinite loop
   track.innerHTML += track.innerHTML;
 
-  const speed = 1; // pixels per frame; zid ola nqis 7asab l-rapidité
+  const speed = 1;
 
   function animate() {
     container.scrollLeft += speed;
-    // ila wslt l-nصف d-track (l-original) rjd scroll
     if (container.scrollLeft >= track.scrollWidth / 2) {
       container.scrollLeft = 0;
     }
     requestAnimationFrame(animate);
   }
 
-  // 2. bda animation
   animate();
 
-  // 3. pause on hover (optionnel)
   container.addEventListener("mouseenter", () => cancelAnimationFrame(animate));
   container.addEventListener("mouseleave", () => animate());
 });
 
-// Add some interactive sound effects (optional)
-function playHoverSound() {
-  // This would play a subtle hover sound if audio files were available
-  // For now, we'll use visual feedback only
-}
+function playHoverSound() {}
 
-// Enhanced hover effects
 document.querySelectorAll(".hotel-card").forEach((card) => {
   card.addEventListener("mouseenter", function () {
     this.style.filter = "brightness(1.1)";
@@ -153,3 +128,161 @@ document.querySelectorAll(".hotel-card").forEach((card) => {
   });
 });
 
+let currentPage = 0;
+const perPage = 3;
+let citiesList = [];
+
+function loadCities(page) {
+  fetch(`../../config/get_cities.php?page=${page}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const container = document.getElementById("cityCarousel");
+      container.innerHTML = "";
+
+      if (!data.success) {
+        console.error("Erreur:", data.error);
+        return;
+      }
+
+      if (data.cities.length === 0 && page > 0) {
+        currentPage = 0;
+        loadCities(0);
+        return;
+      }
+
+      if (data.cities.length === 0 && page === 0) {
+        container.innerHTML =
+          '<p class="text-center text-muted">Aucune ville trouvée.</p>';
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("prevBtn").disabled = true;
+        return;
+      }
+
+      if (page === 0) {
+        citiesList = data.cities;
+        if (citiesList.length > 0 && typeof loadHotelsForCity === "function") {
+          loadHotelsForCity(citiesList[0].id, citiesList[0].name);
+        }
+      }
+
+      data.cities.forEach((city) => {
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6";
+
+        col.innerHTML = `
+              <div class="hotel-card-section2" data-aos="fade-up">
+                <div class="card-image-container-section2">
+                  <img src="../../assets/${city.name.toLowerCase()}.jpg"
+                      alt="${city.name} Hotel"
+                      onerror="this.src='../../assets/land.jpg'"
+                      class="card-image">
+                  <div class="card-overlay-section2"></div>
+                  <button class="favorite-btn" onclick="toggleFavorite(this)">
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+                <div class="card-content-section2">
+                  <h3 class="destination-name-section2">
+                    ${city.name}
+                    <img src="https://flagcdn.com/w40/ma.png" 
+                        alt="Morocco Flag" 
+                        class="country-flag">
+                  </h3>
+                  <a href="#" class="view-btn-section2" onclick="viewDestination('${
+                    city.id
+                  }', '${city.name}')">
+                    Tout voir
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            `;
+        container.appendChild(col);
+      });
+
+      document.getElementById("prevBtn").disabled = false;
+      document.getElementById("nextBtn").disabled = false;
+    })
+    .catch((err) => {
+      console.error("Erreur réseau :", err);
+    });
+}
+function viewDestination(cityId, cityName) {
+  sessionStorage.setItem("selectedCityId", cityId);
+  sessionStorage.setItem("selectedCityName", cityName);
+
+  const event = new CustomEvent("citySelected", {
+    detail: {
+      cityId: cityId,
+      cityName: cityName,
+    },
+  });
+  window.dispatchEvent(event);
+
+  if (typeof loadHotelsForCity === "function") {
+    loadHotelsForCity(cityId, cityName);
+  }
+
+  const citiesSection = document.getElementById("citiesSection");
+  const hotelsSection = document.getElementById("hotelsSection");
+
+  if (citiesSection) {
+    citiesSection.style.display = "none";
+  }
+
+  if (hotelsSection) {
+    hotelsSection.style.display = "block";
+    hotelsSection.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  currentPage++;
+  loadCities(currentPage);
+});
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+  if (currentPage > 0) {
+    currentPage--;
+  } else {
+    findLastPageAndNavigate();
+    return;
+  }
+  loadCities(currentPage);
+});
+
+function findLastPageAndNavigate() {
+  let testPage = 10;
+
+  function testPageExists(page) {
+    fetch(`../config/get_cities.php?page=${page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.cities.length > 0) {
+          fetch(`../config/get_cities.php?page=${page + 1}`)
+            .then((res) => res.json())
+            .then((nextData) => {
+              if (!nextData.success || nextData.cities.length === 0) {
+                currentPage = page;
+                loadCities(currentPage);
+              } else {
+                testPageExists(page + 5);
+              }
+            });
+        } else {
+          if (page > 0) {
+            testPageExists(page - 1);
+          } else {
+            currentPage = 0;
+            loadCities(currentPage);
+          }
+        }
+      });
+  }
+
+  testPageExists(testPage);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadCities(currentPage);
+});

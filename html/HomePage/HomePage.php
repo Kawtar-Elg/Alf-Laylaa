@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_name'])) {
-    header("Location: BeforeAuth.php");
-    exit();
+  header("Location: BeforeAuth.php");
+  exit();
 }
 ?>
 
@@ -15,8 +15,6 @@ if (!isset($_SESSION['user_name'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
 
-  <link href="../../css/section1.css" rel="stylesheet" />
-
   <!-- Bootstrap CSS -->
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
@@ -27,53 +25,21 @@ if (!isset($_SESSION['user_name'])) {
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     rel="stylesheet" />
 
+  <link href="../../css/style.css" rel="stylesheet">
+  <link href="../../css/section1.css" rel="stylesheet" />
+  <link href="../../css/section2.css" rel="stylesheet" />
+  <link href="../../css/section3.css" rel="stylesheet" />
+  <link href="../../css/section4.css" rel="stylesheet" />
+
 </head>
 
-<body>
+<body class="lebody">
+
   <div class="loading-overlay-section3" id="loadingOverlay">
     <div class="spinner-section3"></div>
   </div>
 
-  <header>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top my-navbar">
-      <div
-        class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#">
-          <img src="../../assets/logo.png" alt="Logo" class="logo-img" />
-        </a>
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav">
-          <ul class="navbar-nav d-flex gap-4">
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#hotels">Our Hotels</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#reviews">Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-          <span class="text-light">👋 Welcome , <strong><?php echo $_SESSION['user_name']; ?></strong></span>
-          <img src="../../assets/user-icon.png" alt="Profile" class="rounded-circle" style="width: 32px; height: 32px;" />
-          <form action="../LoginSysteme/logout.php" method="post">
-            <button class="btn btn-sm btn-danger" type="submit">Sign Out</button>
-          </form>
-        </div>
-
-      </div>
-    </nav>
-  </header>
+  <?php include 'header.php'; ?>
 
   <section id="home" class="hero-section">
     <!-- Video Background -->
@@ -234,16 +200,25 @@ if (!isset($_SESSION['user_name'])) {
     </div>
   </section>
 
+  <?php include 'section4.php'; ?>
 
   <?php include 'section2.php'; ?>
 
   <?php include 'section3.php'; ?>
 
+  <?php include 'SousList.php'; ?>
+
+  <?php include 'footer.php'; ?>
+
+
+  <script src="../../js/section1.js"></script>
+  <script src="../../js/section2.js"></script>
+  <script src="../../js/section3.js"></script>
+  <script src="../../js/section4.js"></script>
+  <script src="../../js/SousList.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
 </body>
-
-<script src="../../js/section1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
 </html>
