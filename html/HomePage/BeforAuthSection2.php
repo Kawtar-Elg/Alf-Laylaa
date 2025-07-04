@@ -31,7 +31,7 @@
                         <div class="card-image-container-section2">
                             <img src="../../assets/casaNight.jpg" alt="CasaBlanca Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" onclick="toggleFavorite(this)" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -40,7 +40,7 @@
                                 Casa Blanca
                                 <img src="https://flagcdn.com/w40/ma.png" alt="Morocco Flag" class="country-flag">
                             </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('CasaBlanca')">
+                            <a href="#" class="view-btn-section2" onclick="viewDestination('CasaBlanca')" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -54,7 +54,7 @@
                         <div class="card-image-container-section2">
                             <img src="../../assets/paris.jpg" alt="Paris Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" onclick="toggleFavorite(this)" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -63,7 +63,7 @@
                                 Paris
                                 <img src="https://flagcdn.com/w40/fr.png" alt="France Flag" class="country-flag">
                             </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('Paris')">
+                            <a href="#" class="view-btn-section2" onclick="viewDestination('Paris')" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -78,7 +78,7 @@
                             <img src="../../assets/balii.jpg"
                                 alt="Bali Hotel" class="card-image">
                             <div class="card-overlay-section2"></div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" onclick="toggleFavorite(this)" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -87,7 +87,7 @@
                                 Bali
                                 <img src="https://flagcdn.com/w40/id.png" alt="Indonesia Flag" class="country-flag">
                             </h3>
-                            <a href="#" class="view-btn-section2" onclick="viewDestination('Bali')">
+                            <a href="#" class="view-btn-section2" onclick="viewDestination('Bali')" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>

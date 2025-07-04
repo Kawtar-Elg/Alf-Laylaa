@@ -205,7 +205,17 @@
 }
 
 .hotel-card-section3:hover .destination-name-section3::after {
-  width: 60px;
+  width: 80px;
+}
+
+.card-desc {
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.card-sub-desc {
+  font-size: 1rem;
+  color: var(--text-light);
 }
 
 .country-flag {

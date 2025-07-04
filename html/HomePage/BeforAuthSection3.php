@@ -45,12 +45,12 @@
                                     <i class="fas fa-star-half-alt"></i>
                                 </div>
                             </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" onclick="toggleFavorite(this)" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
                         <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
+                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -76,12 +76,12 @@
                                     <i class="fas fa-star-half-alt"></i>
                                 </div>
                             </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="toggleFavorite(this)">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
                         <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
+                            <a href="#" class="view-btn-section3" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="viewDestination('CasaBlanca')">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -107,12 +107,12 @@
                                     <i class="fas fa-star-half-alt"></i>
                                 </div>
                             </div>
-                            <button class="favorite-btn" onclick="toggleFavorite(this)">
+                            <button class="favorite-btn" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="toggleFavorite(this)">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
                         <div class="card-content-section3">
-                            <a href="#" class="view-btn-section3" onclick="viewDestination('CasaBlanca')">
+                            <a href="#" class="view-btn-section3" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="viewDestination('CasaBlanca')">
                                 Tout voir
                                 <i class="fas fa-arrow-right"></i>
                             </a>

@@ -16,14 +16,10 @@ if (!isset($_SESSION['user_name'])) {
   <title>Home</title>
 
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
-    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
 
   <!-- Font Awesome -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
   <link href="../../css/style.css" rel="stylesheet">
   <link href="../../css/section1.css" rel="stylesheet" />
@@ -54,8 +50,7 @@ if (!isset($_SESSION['user_name'])) {
       <div class="row align-items-center">
         <!-- First Column - Welcome Text -->
         <div class="col-md-6">
-          <div
-            class="hero-content d-flex flex-column justify-content-center align-items-start">
+          <div class="hero-content d-flex flex-column justify-content-center align-items-start">
             <h1 class="hero-title mb-5">
               Welcome Your perfect stay starts here
             </h1>
@@ -70,8 +65,7 @@ if (!isset($_SESSION['user_name'])) {
         </div>
         <!-- Second Column - Booking Form -->
         <div class="col-md-6">
-          <div
-            class="roomify-form-container animate__animated animate__fadeInUp">
+          <div class="roomify-form-container animate__animated animate__fadeInUp">
             <h1 class="roomify-form-title">
               <i class="fas fa-hotel"></i>
               Find Your Stay
@@ -90,12 +84,8 @@ if (!isset($_SESSION['user_name'])) {
                   <i class="fas fa-map-marker-alt"></i>
                   Destination
                 </label>
-                <input
-                  type="text"
-                  class="form-control roomify-form-input"
-                  name="destination"
-                  placeholder="Where are you going?"
-                  required />
+                <input type="text" class="form-control roomify-form-input" name="destination"
+                  placeholder="Where are you going?" required />
               </div>
               <div class="date-row">
                 <div class="roomify-form-group">
@@ -103,22 +93,14 @@ if (!isset($_SESSION['user_name'])) {
                     <i class="fas fa-calendar-check"></i>
                     Check In
                   </label>
-                  <input
-                    type="date"
-                    class="form-control roomify-form-input"
-                    name="checkin"
-                    required />
+                  <input type="date" class="form-control roomify-form-input" name="checkin" required />
                 </div>
                 <div class="roomify-form-group">
                   <label class="roomify-form-label">
                     <i class="fas fa-calendar-times"></i>
                     Check Out
                   </label>
-                  <input
-                    type="date"
-                    class="form-control roomify-form-input"
-                    name="checkout"
-                    required />
+                  <input type="date" class="form-control roomify-form-input" name="checkout" required />
                 </div>
               </div>
               <div class="roomify-form-group">
@@ -126,10 +108,7 @@ if (!isset($_SESSION['user_name'])) {
                   <i class="fas fa-bed"></i>
                   Room Type
                 </label>
-                <select
-                  class="form-select roomify-form-select"
-                  name="room_type"
-                  required>
+                <select class="form-select roomify-form-select" name="room_type" required>
                   <option value="">Select Room Type</option>
                   <option value="standard">Standard Room</option>
                   <option value="deluxe">Deluxe Room</option>
@@ -145,17 +124,11 @@ if (!isset($_SESSION['user_name'])) {
                 <div class="roomify-guest-counter">
                   <span class="roomify-guest-type">Adults</span>
                   <div class="roomify-counter-controls">
-                    <button
-                      type="button"
-                      class="roomify-counter-btn"
-                      onclick="updateCounter('adults', -1)">
+                    <button type="button" class="roomify-counter-btn" onclick="updateCounter('adults', -1)">
                       <i class="fas fa-minus"></i>
                     </button>
                     <span class="roomify-counter-value" id="adults-count">2</span>
-                    <button
-                      type="button"
-                      class="roomify-counter-btn"
-                      onclick="updateCounter('adults', 1)">
+                    <button type="button" class="roomify-counter-btn" onclick="updateCounter('adults', 1)">
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
@@ -163,32 +136,18 @@ if (!isset($_SESSION['user_name'])) {
                 <div class="roomify-guest-counter mt-2">
                   <span class="roomify-guest-type">Children</span>
                   <div class="roomify-counter-controls">
-                    <button
-                      type="button"
-                      class="roomify-counter-btn"
-                      onclick="updateCounter('children', -1)">
+                    <button type="button" class="roomify-counter-btn" onclick="updateCounter('children', -1)">
                       <i class="fas fa-minus"></i>
                     </button>
                     <span class="roomify-counter-value" id="children-count">0</span>
-                    <button
-                      type="button"
-                      class="roomify-counter-btn"
-                      onclick="updateCounter('children', 1)">
+                    <button type="button" class="roomify-counter-btn" onclick="updateCounter('children', 1)">
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
                 </div>
               </div>
-              <input
-                type="hidden"
-                name="adults"
-                id="adults-input"
-                value="2" />
-              <input
-                type="hidden"
-                name="children"
-                id="children-input"
-                value="0" />
+              <input type="hidden" name="adults" id="adults-input" value="2" />
+              <input type="hidden" name="children" id="children-input" value="0" />
               <button type="submit" class="roomify-btn-search">
                 <i class="fas fa-search"></i>
                 Search
@@ -210,6 +169,44 @@ if (!isset($_SESSION['user_name'])) {
 
   <?php include 'footer.php'; ?>
 
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("reservationForm");
+      const errorMessage = document.getElementById("errorMessage");
+      const successMessage = document.getElementById("successMessage");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const destination = form.destination.value.trim();
+        const checkin = form.checkin.value;
+        const checkout = form.checkout.value;
+        const roomType = form.room_type.value;
+        const adults = document.getElementById("adults-count").textContent;
+        const children = document.getElementById("children-count").textContent;
+
+        if (!destination || !checkin || !checkout || !roomType) {
+          errorMessage.style.display = "block";
+          successMessage.style.display = "none";
+          return;
+        }
+
+        document.getElementById("adults-input").value = adults;
+        document.getElementById("children-input").value = children;
+
+        errorMessage.style.display = "none";
+        successMessage.style.display = "block";
+
+        const url = `hotels.php`;
+
+        setTimeout(() => {
+          window.location.href = url;
+        });
+      });
+    });
+
+  </script>
 
   <script src="../../js/section1.js"></script>
   <script src="../../js/section2.js"></script>

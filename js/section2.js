@@ -207,6 +207,7 @@ function loadCities(page) {
       console.error("Erreur réseau :", err);
     });
 }
+
 function viewDestination(cityId, cityName) {
   sessionStorage.setItem("selectedCityId", cityId);
   sessionStorage.setItem("selectedCityName", cityName);

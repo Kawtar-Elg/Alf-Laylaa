@@ -23,19 +23,6 @@
 .lebody {
   background: #000;
 }
-
-#sousListServices {
-  display: none;
-}
-
-#sousListHeader {
-  display: none;
-}
-
-#sousListRooms {
-  display: none;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -167,6 +154,17 @@
   color: var(--dark-bg);
 }
 
+.btn-outline-luxury-cancel {
+  background: transparent;
+  color: var(--primary-gold);
+  border: 2px solid var(--primary-gold);
+  font-weight: 600;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition);
+}
+
 .btn-outline-luxury {
   background: transparent;
   color: var(--primary-gold);
@@ -241,7 +239,7 @@
 .room-image {
   position: relative;
   overflow: hidden;
-  height: 250px;
+  height: 400px;
 }
 
 .room-image img {
@@ -302,6 +300,12 @@
 .room-name {
   color: var(--text-primary);
   font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.room-desc {
+  color: var(--text-primary);
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -673,6 +677,7 @@
 
 .tab-content {
   background: var(--card-bg);
+  border-radius: 15px;
 }
 
 .amenity-item {
@@ -827,12 +832,12 @@
 /* Stats Cards */
 .stat-card {
   background: var(--card-bg);
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 15px;
   border: 1px solid var(--dark-border);
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   transition: var(--transition);
 }
 
@@ -1298,7 +1303,7 @@
 }
 
 .form-select option {
-  background-color: var(--card-bg);
+  background-color: var(--dark-border);
   color: var(--text-primary);
 }
 

@@ -3,29 +3,16 @@ session_start();
 require_once '../../config/auth.php';
 require_once '../../config/database.php';
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $hotelId = $_POST['hotel_id'] ?? null;
-
-    if ($hotelId !== null) {
-        $_SESSION['selected_hotel_id'] = $hotelId;
-
-        echo json_encode([
-            'success' => true,
-            'message' => 'Hotel ID saved in session.',
-            'stored_id' => $hotelId
-        ]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Missing hotel_id']);
-    }
-    exit;
-}
-
-if (isset($_SESSION['selected_hotel_id'])) {
-    $hotel_id = $_SESSION['selected_hotel_id'];
+if (isset($_SESSION['selectedHotelId'])) {
+    $hotel_id = $_SESSION['selectedHotelId'];
+    $hotel_name = $_SESSION['selectedHotelName'] ?? '';
     $rooms = getRoomsByHotelId($hotel_id);
+    if (!$rooms) {
+        $rooms = [];
+    }
 } else {
     echo "Aucun hôtel sélectionné.";
+    $rooms = [];
 }
 
 $categories = array_unique(array_column($rooms, 'type'));
@@ -36,6 +23,7 @@ $price_ranges = [
     '400-600' => '$400 - $600',
     '600+' => '$600+'
 ];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +34,12 @@ $price_ranges = [
     <title>Luxury Rooms & Suites - Luxe Haven</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/section1.css">
 </head>
 
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include 'header.php'; ?>
 
     <section class="rooms-section py-5  mt-5">
         <div class="container">
@@ -73,7 +62,8 @@ $price_ranges = [
                                         <div class="filter-group">
                                             <?php foreach ($price_ranges as $value => $label): ?>
                                                 <label class="filter-radio">
-                                                    <input type="radio" name="price_filter" value="<?php echo $value; ?>" <?php echo $value === 'all' ? 'checked' : ''; ?>>
+                                                    <input type="radio" name="price_filter" value="<?php echo $value; ?>"
+                                                        <?php echo $value === 'all' ? 'checked' : ''; ?>>
                                                     <span class="radio-custom"></span>
                                                     <span class="radio-label"><?php echo $label; ?></span>
                                                 </label>
@@ -90,7 +80,8 @@ $price_ranges = [
                                             </label>
                                             <?php foreach ($categories as $category): ?>
                                                 <label class="filter-radio">
-                                                    <input type="radio" name="category_filter" value="<?php echo $category; ?>">
+                                                    <input type="radio" name="category_filter"
+                                                        value="<?php echo $category; ?>">
                                                     <span class="radio-custom"></span>
                                                     <span class="radio-label"><?php echo $category; ?></span>
                                                 </label>
@@ -105,8 +96,7 @@ $price_ranges = [
                 <div class="col-9"><!-- Rooms Grid -->
                     <div class="row" id="rooms-grid">
                         <?php foreach ($rooms as $room): ?>
-                            <div class="col-lg-4 col-md-6 mb-4 room-item"
-                                data-category="<?php echo $room['type']; ?>"
+                            <div class="col-lg-6 col-md-6 mb-4 room-item" data-category="<?php echo $room['type']; ?>"
                                 data-price="<?php echo $room['price']; ?>">
                                 <div class="room-card" data-room-id="<?php echo $room['id']; ?>">
                                     <div class="room-image">
@@ -120,24 +110,31 @@ $price_ranges = [
                                         $firstImage = !empty($images) ? trim($images[0]) : 'https://via.placeholder.com/400x300';
                                         ?>
 
-                                        <img src="<?php echo $firstImage; ?>" alt="<?php echo $room['name']; ?>" class="img-fluid">
+                                        <img src="<?php echo $firstImage; ?>" alt="<?php echo $room['name']; ?>"
+                                            class="img-fluid">
                                         <div class="room-overlay">
                                             <div class="room-badge"><?php echo $room['type']; ?></div>
                                             <div class="room-actions">
-                                                <a href="room-detail.php?id=<?php echo $room['id']; ?>" class="btn btn-sm btn-luxury">View Details</a>
+                                                <a href="room-detail.php?id=<?php echo $room['id']; ?>"
+                                                    class="btn btn-sm btn-luxury">View Details</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="room-info">
                                         <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h5 class="room-name"><?php echo $room['name']; ?></h5>
+                                            <div>
+                                                <h5 class="room-name"><?php echo htmlspecialchars($room['name']); ?> in
+                                                    <?php echo htmlspecialchars($hotel_name); ?>
+                                                </h5>
+                                                <h6 class="room-desc"><?php echo htmlspecialchars($room['description']); ?></h6>
+                                            </div>
                                             <div class="room-rating">
                                                 <i class="fas fa-star text-gold"></i>
                                                 <span>4.9</span>
                                             </div>
                                         </div>
                                         <div class="room-price mb-2">
-                                            <span class="price">$<?php echo number_format($room['price']); ?></span>
+                                            <span class="price"><?php echo number_format($room['price']); ?>Dh</span>
                                             <span class="period">/night</span>
                                         </div>
                                         <div class="room-features">
@@ -148,8 +145,11 @@ $price_ranges = [
                                                 <i class="fas fa-bath"></i> Private Bath
                                             </span>
                                             <span class="feature">
-                                                <i class="fas fa-expand-arrows-alt"></i> <?php echo $room['size']; ?> sqft
+                                                <i class="fas fa-expand-arrows-alt"></i> <?php echo $room['size']; ?> m²
                                             </span>
+                                        </div>
+                                        <div class="room-price my-2">
+                                            <span class="price" style="color : white;font-size: 0.9rem;">localisation : <?php echo htmlspecialchars($room['location']); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -176,10 +176,11 @@ $price_ranges = [
         </div>
     </section>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/section1.js"></script>
 </body>
 
 </html>

@@ -24,13 +24,11 @@ function login($email, $password) {
 }
 
 function register($name, $email, $password) {
-    // Check if email already exists
     $existingUser = getUserByEmail($email);
     if ($existingUser) {
         return false;
     }
     
-    // Create new user using database function
     return createUser($email, $email, $password, $name);
 }
 

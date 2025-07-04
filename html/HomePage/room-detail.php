@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'config/auth.php';
-require_once 'config/database.php';
+require_once '../../config/auth.php';
+require_once '../../config/database.php';
 
 $room_id = $_GET['id'] ?? null;
 if (!$room_id) {
@@ -24,11 +24,17 @@ if (!$room) {
     <title>Luxury Rooms & Suites - Luxe Haven</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="../../css/section1.css" rel="stylesheet" />
+    <link href="../../css/section2.css" rel="stylesheet" />
+    <link href="../../css/section3.css" rel="stylesheet" />
+    <link href="../../css/section4.css" rel="stylesheet" />
+
 </head>
 
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include 'header.php'; ?>
 
     <section class="room-detail-section mt-5 py-5">
         <div class="container mt-5">
@@ -37,7 +43,8 @@ if (!$room) {
                 <div class="col-lg-8">
                     <div class="room-gallery">
                         <div class="main-image mb-3">
-                            <img src="<?php echo $room['image']; ?>" alt="<?php echo $room['name']; ?>" class="img-fluid rounded">
+                            <img src="<?php echo $room['image']; ?>" alt="<?php echo $room['name']; ?>"
+                                class="img-fluid rounded">
                             <div class="image-overlay">
                                 <div class="room-badge"><?php echo $room['category']; ?></div>
                             </div>
@@ -45,10 +52,14 @@ if (!$room) {
                         <div class="row">
                             <?php foreach ($room['gallery'] as $image): ?>
                                 <div class="col-4 mb-2">
-                                    <img src="<?php echo $image; ?>" alt="<?php echo $room['name']; ?>" class="img-fluid rounded gallery-thumb">
+                                    <img src="<?php echo $image; ?>" alt="<?php echo $room['name']; ?>"
+                                        class="img-fluid rounded gallery-thumb">
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                    </div>
+                    <div class="amenity-room">
+
                     </div>
                 </div>
 
@@ -57,6 +68,7 @@ if (!$room) {
                     <div class="room-details-card">
                         <div class="room-header mb-4">
                             <h1 class="room-title"><?php echo $room['name']; ?></h1>
+                            <h2 class="room-desc my-2"><?php echo $room['description']; ?></h2>
                             <div class="room-rating mb-2">
                                 <div class="stars">
                                     <?php for ($i = 1; $i <= 5; $i++): ?>
@@ -73,7 +85,7 @@ if (!$room) {
 
                         <div class="room-price-section mb-4">
                             <div class="price-display">
-                                <span class="price">$<?php echo $room['price']; ?></span>
+                                <span class="price"><?php echo $room['price']; ?>Dh</span>
                                 <span class="period">/night</span>
                             </div>
                         </div>
@@ -95,7 +107,7 @@ if (!$room) {
                                 <div class="col-4 text-center">
                                     <div class="spec-item">
                                         <i class="fas fa-expand-arrows-alt"></i>
-                                        <span><?php echo isset($room['size']) ? $room['size'] : 'N/A'; ?> sqft</span>
+                                        <span><?php echo isset($room['size']) ? $room['size'] : 'N/A'; ?> m²</span>
                                     </div>
                                 </div>
                             </div>
@@ -163,21 +175,37 @@ if (!$room) {
             <div class="row mt-5">
                 <div class="col-12">
                     <div class="room-details-tabs">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-overview-tab" data-bs-toggle="tab" data-bs-target="#nav-overview" type="button" role="tab">Overview</button>
-                                <button class="nav-link" id="nav-amenities-tab" data-bs-toggle="tab" data-bs-target="#nav-amenities" type="button" role="tab">Room Amenities</button>
-                                <button class="nav-link" id="nav-rules-tab" data-bs-toggle="tab" data-bs-target="#nav-rules" type="button" role="tab">Booking Rules</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-overview" role="tabpanel">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                                    data-bs-target="#overview" type="button" role="tab" aria-controls="overview"
+                                    aria-selected="true">
+                                    Overview
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="amenities-tab" data-bs-toggle="tab"
+                                    data-bs-target="#amenities" type="button" role="tab" aria-controls="amenities"
+                                    aria-selected="false">
+                                    Room Amenities
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules"
+                                    type="button" role="tab" aria-controls="rules" aria-selected="false">
+                                    Booking Rules
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                aria-labelledby="overview-tab">
                                 <div class="p-4">
                                     <h5>Overview</h5>
                                     <p><?php echo $room['description']; ?></p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-amenities" role="tabpanel">
+                            <div class="tab-pane fade" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
                                 <div class="p-4">
                                     <h5>Room Amenities</h5>
                                     <div class="row">
@@ -192,7 +220,7 @@ if (!$room) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-rules" role="tabpanel">
+                            <div class="tab-pane fade" id="rules" role="tabpanel" aria-labelledby="rules-tab">
                                 <div class="p-4">
                                     <h5>Booking Rules & Policies</h5>
                                     <div class="row">
@@ -200,7 +228,8 @@ if (!$room) {
                                             <h6><i class="fas fa-clock text-gold me-2"></i>Check-In Information</h6>
                                             <ul class="rules-list">
                                                 <li>Standard check-in: 3:00 PM</li>
-                                                <li>Early check-in available from 12:00 PM (subject to availability)</li>
+                                                <li>Early check-in available from 12:00 PM (subject to availability)
+                                                </li>
                                                 <li>Valid government-issued photo ID required</li>
                                                 <li>Credit card authorization for incidentals</li>
                                                 <li>VIP guests: Private check-in available</li>
@@ -209,7 +238,8 @@ if (!$room) {
                                             </ul>
                                         </div>
                                         <div class="col-md-6">
-                                            <h6><i class="fas fa-door-open text-gold me-2"></i>Check-Out Information</h6>
+                                            <h6><i class="fas fa-door-open text-gold me-2"></i>Check-Out Information
+                                            </h6>
                                             <ul class="rules-list">
                                                 <li>Standard check-out: 11:00 AM</li>
                                                 <li>Late check-out until 3:00 PM (additional charges apply)</li>
@@ -236,7 +266,8 @@ if (!$room) {
                                             </ul>
                                         </div>
                                         <div class="col-md-6">
-                                            <h6><i class="fas fa-times-circle text-gold me-2"></i>Cancellation Policy</h6>
+                                            <h6><i class="fas fa-times-circle text-gold me-2"></i>Cancellation Policy
+                                            </h6>
                                             <ul class="rules-list">
                                                 <li>Standard rooms: 24-hour cancellation policy</li>
                                                 <li>Suites: 48-hour cancellation policy</li>
@@ -263,7 +294,8 @@ if (!$room) {
                                             </ul>
                                         </div>
                                         <div class="col-md-6">
-                                            <h6><i class="fas fa-concierge-bell text-gold me-2"></i>Services & Amenities</h6>
+                                            <h6><i class="fas fa-concierge-bell text-gold me-2"></i>Services & Amenities
+                                            </h6>
                                             <ul class="rules-list">
                                                 <li>24/7 room service and concierge available</li>
                                                 <li>Housekeeping service twice daily</li>
@@ -284,10 +316,9 @@ if (!$room) {
         </div>
     </section>
 
-    <?php include 'includes/footer.php'; ?>
-
+    <?php include 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 
 </html>

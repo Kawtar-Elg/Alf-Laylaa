@@ -33,19 +33,19 @@
                      id="navbarNav">
                      <ul class="navbar-nav d-flex gap-4">
                          <li class="nav-item">
-                             <a class="nav-link" href="#home">Home</a>
+                             <a class="nav-link" href="#home" data-bs-toggle="modal" data-bs-target="#loginModal">Home</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="#about">About Us</a>
+                             <a class="nav-link" href="#about" data-bs-toggle="modal" data-bs-target="#loginModal">About Us</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="#rtl">Our Hotels</a>
+                             <a class="nav-link" href="#rtl" data-bs-toggle="modal" data-bs-target="#loginModal">Our Hotels</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="#reviews">Reviews</a>
+                             <a class="nav-link" href="#reviews" data-bs-toggle="modal" data-bs-target="#loginModal">Reviews</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="#contact">Contact Us</a>
+                             <a class="nav-link" href="#contact" data-bs-toggle="modal" data-bs-target="#loginModal">Contact Us</a>
                          </li>
                      </ul>
                  </div>

@@ -131,18 +131,19 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h5><i class="fas fa-crown me-2"></i>Alf Layla</h5>
-                <p>Experience luxury like never before. Our exclusive collection of rooms and suites offers the perfect blend of comfort, elegance, and world-class service.</p>
+                <p>Experience luxury like never before. Our exclusive collection of rooms and suites offers the perfect
+                    blend of comfort, elegance, and world-class service.</p>
                 <div class="social-links mt-3">
-                    <a href="#" class="me-3" title="Facebook">
+                    <a href="#" class="me-3" title="Facebook" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="me-3" title="Instagram">
+                    <a href="#" class="me-3" title="Instagram" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="me-3" title="Twitter">
+                    <a href="#" class="me-3" title="Twitter" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="me-3" title="LinkedIn">
+                    <a href="#" class="me-3" title="LinkedIn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -154,11 +155,11 @@
             <div class="footer-section">
                 <h5>Quick Links</h5>
                 <div class="footer-links">
-                    <a href="BeforAuth.php">Home</a>
-                    <a href="rooms.php">Rooms & Suites</a>
-                    <a href="#services">Services</a>
-                    <a href="#about">About Us</a>
-                    <a href="#contact">Contact</a>
+                    <a href="BeforAuth.php" data-bs-toggle="modal" data-bs-target="#loginModal">Home</a>
+                    <a href="rooms.php" data-bs-toggle="modal" data-bs-target="#loginModal">Rooms & Suites</a>
+                    <a href="#services" data-bs-toggle="modal" data-bs-target="#loginModal">Services</a>
+                    <a href="#about" data-bs-toggle="modal" data-bs-target="#loginModal">About Us</a>
+                    <a href="#contact" data-bs-toggle="modal" data-bs-target="#loginModal">Contact</a>
                     <a href="" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
                     <a href="" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
                 </div>
@@ -167,14 +168,14 @@
             <div class="footer-section">
                 <h5>Services</h5>
                 <div class="footer-links">
-                    <a href="#">24/7 Concierge</a>
-                    <a href="#">Luxury Spa</a>
-                    <a href="#">Fine Dining</a>
-                    <a href="#">Room Service</a>
-                    <a href="#">Valet Parking</a>
-                    <a href="#">Airport Transfer</a>
-                    <a href="#">Business Center</a>
-                    <a href="#">Event Planning</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">24/7 Concierge</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Luxury Spa</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Fine Dining</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Room Service</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Valet Parking</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Airport Transfer</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Business Center</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Event Planning</a>
                 </div>
             </div>
 
@@ -186,10 +187,10 @@
                         Mesa, New Jersey 45463
                     </p>
                     <p><i class="fas fa-phone me-2 text-gold"></i>
-                        <a href="tel:+1-555-LUXURY">+212608399120</a>
+                        <a href="tel:+1-555-LUXURY" data-bs-toggle="modal" data-bs-target="#loginModal">+212608399120</a>
                     </p>
                     <p><i class="fas fa-envelope me-2 text-gold"></i>
-                        <a href="mailto:reservations@luxehaven.com">reservations@alflayla.com</a>
+                        <a href="mailto:reservations@luxehaven.com" data-bs-toggle="modal" data-bs-target="#loginModal">reservations@alflayla.com</a>
                     </p>
                     <p><i class="fas fa-clock me-2 text-gold"></i>
                         24/7 Guest Services
@@ -205,9 +206,9 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <div class="footer-links-inline">
-                        <a href="#" class="me-3">Privacy Policy</a>
-                        <a href="#" class="me-3">Terms of Service</a>
-                        <a href="#">Accessibility</a>
+                        <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Privacy Policy</a>
+                        <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Terms of Service</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Accessibility</a>
                     </div>
                 </div>
             </div>
@@ -218,16 +219,15 @@
 
 <?php
 // Create logout.php if it doesn't exist
-$logout_file = '../../config/config/logout.php';
+$logout_file = '../../config/logout.php';
 if (!file_exists($logout_file)) {
     $logout_content = '<?php
-session_start();
-session_destroy();
-header("Location: HomePage");
-exit;
-?>';
+                        session_start();
+                        session_destroy();
+                        header("Location: ../../config/logout.php");
+                        exit;
+                        ?>';
 
-    // Ensure config directory exists
     if (!is_dir('config')) {
         mkdir('config', 0755, true);
     }

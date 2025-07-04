@@ -2,6 +2,7 @@
 session_start();
 require '../../config/database.php';
 
+$pdo = Database::getConnection();
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
@@ -15,21 +16,20 @@ if ($data) {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT id, full_name, password_hash FROM users WHERE email = ?");
+        // Regular user authentication
+        $stmt = $pdo->prepare("SELECT id, full_name, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // ✅ تخزين المستخدم فـ session
+        if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['full_name'];
             $_SESSION['email'] = $email;
 
-            // ✅ الرد الناجح
             echo json_encode([
                 'success' => true,
                 'message' => 'Connexion réussie !',
-                'redirect' => '../pages/home.php'
+                'redirect' => '../HomePage/HomePage.php'
             ]);
             exit();
         } else {

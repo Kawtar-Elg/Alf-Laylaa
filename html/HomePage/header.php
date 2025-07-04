@@ -1,23 +1,20 @@
 <header>
     <!-- Navigation -->
     <nav class="navbar navbar-home navbar-expand-lg fixed-top my-navbar">
-        <div
-            class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="HomePage.php">
                 <img src="../../assets/logo.png" alt="Logo" class="logo-img" />
             </a>
-            <div
-                class="collapse navbar-collapse justify-content-center"
-                id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav d-flex gap-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="HomePage.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#hotels">Our Hotels</a>
+                        <a class="nav-link" href="hotels.php">Our Hotels</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#reviews">Reviews</a>
@@ -30,13 +27,15 @@
             <div class="d-flex align-items-center gap-3">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown">
                             <i class="fas fa-user-circle me-1"></i>
                             <?php echo $_SESSION['user_name']; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item <?php echo $current_page === 'dashboard.php' ? 'active' : ''; ?>" href="dashboard.php">
+                                <a class="dropdown-item <?php echo $current_page === 'dashboard.php' ? 'active' : ''; ?>"
+                                    href="dashboard.php">
                                     <i class="fas fa-tachometer-alt me-2"></i>
                                     Dashboard
                                 </a>
@@ -57,7 +56,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#" onclick="logout()">
+                                <a class="dropdown-item" href="#" onclick="logoutNow()">
                                     <i class="fas fa-sign-out-alt me-2"></i>
                                     Logout
                                 </a>
@@ -71,17 +70,13 @@
 </header>
 
 <script>
-    // Create logout endpoint
     if (typeof logout === 'undefined') {
-        function logout() {
+        function logoutNow() {
             if (confirm('Are you sure you want to logout?')) {
-                // Create a form to POST to logout
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '../../config/logout.php';
-                document.body.appendChild(form);
-                form.submit();
+                window.location.href = "../../config/logout.php";
             }
         }
+    } else {
+        console.log("anything in this else");
     }
 </script>

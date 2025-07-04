@@ -39,20 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
     }
     
     // Room filtering functionality
@@ -471,13 +457,6 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutInputCalc.addEventListener('change', updateTotalPrice);
     }
 });
-
-// Handle logout functionality
-function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-        window.location.href = 'config/logout.php';
-    }
-}
 
 // Handle booking cancellation
 function cancelBooking(bookingId) {

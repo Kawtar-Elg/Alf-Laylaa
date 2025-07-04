@@ -1,7 +1,8 @@
 <?php
 require '../../config/database.php';
 
-// Récupérer les données JSON envoyées
+$pdo = Database::getConnection();
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 $response = ['success' => false, 'message' => ''];
@@ -12,8 +13,13 @@ if ($data) {
     $phone = trim($data['phone'] ?? '');
     $address = trim($data['address'] ?? '');
     $password = $data['password'] ?? '';
-    
-    // Validation des champs
+    $confirmPassword = $data['confirmPassword'] ?? '';
+    $dateOfBirth = trim($data['dateOfBirth'] ?? null);
+    $username = explode('@', $email)[0];
+    $profileImage = null;
+    $emailVerified = false;
+    $status = 'active';
+
     if (empty($fullName) || empty($email) || empty($password)) {
         $response['message'] = 'Tous les champs requis doivent être remplis.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -21,22 +27,31 @@ if ($data) {
     } elseif ($password !== ($data['confirmPassword'] ?? '')) {
         $response['message'] = 'Les mots de passe ne correspondent pas.';
     } else {
-        // Vérifier si l'email existe déjà
+
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
-        
+
         if ($stmt->fetch()) {
             $response['message'] = 'Cet e-mail est déjà utilisé.';
         } else {
-            // Hacher le mot de passe
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insérer l'utilisateur dans la base
             $stmt = $pdo->prepare("
-                INSERT INTO users (full_name, email, phone, address, password_hash)
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO users (username, email, password, full_name, phone, address, date_of_birth, profile_image, email_verified, status, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
             ");
-            $success = $stmt->execute([$fullName, $email, $phone, $address, $passwordHash]);
+            $success = $stmt->execute([
+                $username,
+                $email,
+                password_hash($password, PASSWORD_DEFAULT),
+                $fullName,
+                $phone,
+                $address,
+                $dateOfBirth,
+                $profileImage,
+                $emailVerified,
+                $status
+            ]);
 
             if ($success) {
                 $response['success'] = true;
@@ -50,7 +65,6 @@ if ($data) {
     $response['message'] = 'Aucune donnée reçue.';
 }
 
-// Réponse en JSON
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>

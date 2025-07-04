@@ -1,19 +1,5 @@
 <?php
-$host = "127.0.0.1";
-$port = 3308;
-$dbname = "alf-laylaa";
-$username = "root";
-$password = "";
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "✅ Connexion réussie !";
-} catch (PDOException $e) {
-    die("❌ Erreur de connexion : " . $e->getMessage());
-}
-
-// MySQL Database configuration and connection management
 class Database
 {
     private static $connection = null;
@@ -34,6 +20,7 @@ class Database
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES => false,
                 ]);
+                
             } catch (PDOException $e) {
                 throw new Exception("Database connection failed: " . $e->getMessage());
             }
@@ -52,11 +39,9 @@ function getRoomsByHotelId($hotel_id = 0)
     $db = Database::getConnection();
 
     if ($hotel_id === 0) {
-        // Get all rooms
         $stmt = $db->prepare("SELECT * FROM rooms ORDER BY price ASC");
         $stmt->execute();
     } else {
-        // Get only rooms for the specified hotel
         $stmt = $db->prepare("SELECT * FROM rooms WHERE hotel_id = ? ORDER BY price ASC");
         $stmt->bindValue(1, $hotel_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -170,11 +155,21 @@ function getUserById($id)
     return $user;
 }
 
-function updateUser($id, $fullName, $email, $phone)
+function updateUser($id, $username, $email, $fullName, $phone = null, $dateOfBirth = null, $address = null, $profileImage = null)
 {
     $db = Database::getConnection();
-    $stmt = $db->prepare("UPDATE users SET full_name = ?, email = ?, phone = ?, updated_at = NOW() WHERE id = ?");
-    return $stmt->execute([$fullName, $email, $phone, $id]);
+    
+    $stmt = $db->prepare("
+        UPDATE users 
+        SET username = ?, email = ?, full_name = ?, phone = ?, 
+            date_of_birth = ?, address = ?, profile_image = ?, updated_at = NOW()
+        WHERE id = ?
+    ");
+    
+    return $stmt->execute([
+        $username, $email, $fullName, $phone, 
+        $dateOfBirth, $address, $profileImage, $id
+    ]);
 }
 
 // Booking management functions
@@ -285,3 +280,42 @@ function getUserBookingStats($userId)
     $stmt->execute([$userId]);
     return $stmt->fetch();
 }
+
+
+
+function getAllHotels()
+{
+    $pdo = Database::getConnection();
+    $stmt = $pdo->query("SELECT * FROM hotels");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function getAllRooms()
+{
+    $pdo = Database::getConnection();
+    $stmt = $pdo->query("SELECT * FROM rooms");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getHotelsBySearch($search = '')
+{
+    error_log("DEBUG: Inside getHotelsBySearch() with search = $search");
+
+    $pdo = Database::getConnection();
+
+    if (empty($search)) {
+        $stmt = $pdo->query("SELECT * FROM hotels");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    $sql = "SELECT * FROM hotels WHERE name LIKE :term OR address LIKE :term2";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':term' => '%' . $search . '%',
+        ':term2' => '%' . $search . '%'
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+

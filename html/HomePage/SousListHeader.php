@@ -28,20 +28,3 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </div>
     </div>
 </nav>
-
-<!-- Add logout script -->
-<script>
-    // Create logout endpoint
-    if (typeof logout === 'undefined') {
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Create a form to POST to logout
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = 'config/logout.php';
-                document.body.appendChild(form);
-                form.submit();
-            }
-        }
-    }
-</script>

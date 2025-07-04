@@ -1,186 +1,175 @@
-class WeekendPackageCarousel_WP2024 {
-  constructor() {
-    this.track = document.getElementById("wpCarouselTrack");
-    this.cards = document.querySelectorAll(".wppackage-card-b5q8");
-    this.prevBtn = document.getElementById("wpPrevBtn");
-    this.nextBtn = document.getElementById("wpNextBtn");
-    this.indicatorsContainer = document.getElementById("wpIndicators");
+// --- Hotel AJAX Search ---
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const roomsGrid = document.getElementById("rooms-grid");
 
-    this.currentIndex = 0;
-    this.cardsPerView = this.getCardsPerView();
-    this.totalCards = this.cards.length;
-    this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
+  if (!searchInput || !roomsGrid) return;
 
-    this.init();
-  }
+  let lastQuery = "";
+  let debounceTimeout;
 
-  init() {
-    this.createIndicators();
-    this.updateCarousel();
-    this.bindEvents();
+  // Create a wrapper for the search input to ensure proper positioning
+  const searchWrapper = document.createElement("div");
+  searchWrapper.style.position = "relative";
+  searchWrapper.style.zIndex = "999999"; // Very high z-index for the wrapper
 
-    // Auto-resize handling
-    window.addEventListener("resize", () => {
-      this.cardsPerView = this.getCardsPerView();
-      this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
-      this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
-      this.updateCarousel();
-    });
-  }
+  // Insert wrapper before search input and move input inside
+  searchInput.parentNode.insertBefore(searchWrapper, searchInput);
+  searchWrapper.appendChild(searchInput);
 
-  getCardsPerView() {
-    const containerWidth = this.track.parentElement.offsetWidth;
-    if (containerWidth < 576) return 1;
-    if (containerWidth < 768) return 2;
-    return 3;
-  }
+  // Suggestion dropdown with improved styling
+  let suggestionBox = document.createElement("div");
+  suggestionBox.className = "autocomplete-suggestions";
+  suggestionBox.style.position = "absolute";
+  suggestionBox.style.top = "100%"; // Position below the input
+  suggestionBox.style.left = "0";
+  suggestionBox.style.right = "0";
+  suggestionBox.style.zIndex = "999999"; // Very high z-index to appear above everything
+  suggestionBox.style.background = "rgba(26, 26, 26, 0.95)"; // Semi-transparent dark background
+  suggestionBox.style.backdropFilter = "blur(10px)"; // Blur effect
+  suggestionBox.style.webkitBackdropFilter = "blur(10px)"; // Safari support
+  suggestionBox.style.color = "#ffffff"; // Light text
+  suggestionBox.style.border = "1px solid rgba(255, 255, 255, 0.2)"; // Subtle light border
+  suggestionBox.style.borderRadius = "12px"; // Rounded corners
+  suggestionBox.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.3)"; // Soft shadow
+  suggestionBox.style.display = "none";
+  suggestionBox.style.maxHeight = "300px"; // Limit height
+  suggestionBox.style.overflowY = "auto"; // Scroll if needed
+  suggestionBox.style.marginTop = "5px"; // Small gap from input
+  searchWrapper.appendChild(suggestionBox);
 
-  createIndicators() {
-    const numIndicators = this.maxIndex + 1;
-    this.indicatorsContainer.innerHTML = "";
+  searchInput.addEventListener("input", function () {
+    const query = searchInput.value.trim();
+    if (query === lastQuery) return;
+    lastQuery = query;
 
-    for (let i = 0; i < numIndicators; i++) {
-      const indicator = document.createElement("div");
-      indicator.className = `wpindicator-dot-f7c4 ${
-        i === 0 ? "wpactive-state-r3t7" : ""
-      }`;
-      indicator.addEventListener("click", () => this.goToSlide(i));
-      this.indicatorsContainer.appendChild(indicator);
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      fetchHotels(query);
+      fetchSuggestions(query);
+    }, 300);
+  });
+
+  searchInput.addEventListener("blur", function () {
+    setTimeout(() => (suggestionBox.style.display = "none"), 200);
+  });
+
+  searchInput.addEventListener("focus", function () {
+    if (searchInput.value.trim().length > 0) {
+      fetchSuggestions(searchInput.value.trim());
     }
+  });
+
+  function fetchSuggestions(query) {
+    if (!query) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+    fetch(`../../config/search-suggestions.php?q=${encodeURIComponent(query)}`)
+      .then((response) => response.json())
+      .then((suggestions) => {
+        renderSuggestions(suggestions);
+      })
+      .catch(() => {
+        suggestionBox.style.display = "none";
+      });
   }
 
-  bindEvents() {
-    this.prevBtn.addEventListener("click", () => this.prev());
-    this.nextBtn.addEventListener("click", () => this.next());
+  function renderSuggestions(suggestions) {
+    if (!suggestions || suggestions.length === 0) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+    suggestionBox.innerHTML = suggestions
+      .map(
+        (s) =>
+          `<div class="autocomplete-suggestion" style="
+            padding: 12px 16px;
+            cursor: pointer;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+          " 
+          onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'; this.style.transform='translateX(4px)';"
+          onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateX(0)';">${escapeHtml(
+            s.trim()
+          )}</div>`
+      )
+      .join("");
 
-    // Touch/swipe support
-    let startX = 0;
-    let isDragging = false;
+    // Remove border from last suggestion
+    const lastSuggestion = suggestionBox.lastElementChild;
+    if (lastSuggestion) {
+      lastSuggestion.style.borderBottom = "none";
+    }
 
-    this.track.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    });
+    suggestionBox.style.display = "block";
 
-    this.track.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-    });
-
-    this.track.addEventListener("touchend", (e) => {
-      if (!isDragging) return;
-
-      const endX = e.changedTouches[0].clientX;
-      const diffX = startX - endX;
-
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          this.next();
-        } else {
-          this.prev();
-        }
-      }
-
-      isDragging = false;
-    });
-
-    // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") this.prev();
-      if (e.key === "ArrowRight") this.next();
-    });
-
-    // Card click events
-    this.cards.forEach((card, index) => {
-      card.addEventListener("click", () => {
-        console.log(
-          `Package selected: ${
-            card.querySelector(".wpcard-date-l6w1").textContent
-          }`
-        );
-        // Add your booking logic here
+    Array.from(suggestionBox.children).forEach((child) => {
+      child.addEventListener("mousedown", function (e) {
+        const selectedText = this.textContent.trim().replace(/\s+/g, " ");
+        searchInput.value = selectedText;
+        suggestionBox.style.display = "none";
+        fetchHotels(selectedText);
       });
     });
   }
 
-  prev() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.updateCarousel();
+  function fetchHotels(query) {
+    fetch(`../../config/search-hotels.php?search=${encodeURIComponent(query)}`)
+      .then((response) => response.json())
+      .then((hotels) => {
+        renderHotels(hotels);
+      })
+      .catch((err) => {
+        console.error("Error fetching hotels:", err);
+        roomsGrid.innerHTML =
+          '<div class="col-12 text-center"><p class="text-light">Error loading hotels.</p></div>';
+      });
+  }
+
+  function renderHotels(hotels) {
+    if (!hotels || hotels.length === 0) {
+      roomsGrid.innerHTML =
+        '<div class="col-12 text-center"><p class="text-light">No hotels found.</p></div>';
+      return;
     }
+    roomsGrid.innerHTML = hotels
+      .map(
+        (hotel) => `
+            <div class="col-lg-4 col-md-6 mb-4 room-item">
+                <div class="room-card shadow-sm">
+                    <div class="room-image">
+                        <img src="../../assets/hotels/${
+                          hotel.id
+                        }.png" alt="${escapeHtml(
+          hotel.name
+        )}" class="img-fluid img" />
+                    </div>
+                    <div class="room-info mt-3 px-3">
+                        <h5 class="room-name">${escapeHtml(hotel.name)}</h5>
+                        <p class="room-desc">${escapeHtml(
+                          hotel.description || ""
+                        )}</p>
+                        <a href="rooms.php?hotel_id=${
+                          hotel.id
+                        }" class="btn btn-sm btn-luxury mt-2">View Rooms</a>
+                    </div>
+                </div>
+            </div>
+        `
+      )
+      .join("");
   }
 
-  next() {
-    if (this.currentIndex < this.maxIndex) {
-      this.currentIndex++;
-      this.updateCarousel();
-    }
+  function escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+    return String(text).replace(/[&<>"']/g, (m) => map[m]);
   }
-
-  goToSlide(index) {
-    this.currentIndex = Math.max(0, Math.min(index, this.maxIndex));
-    this.updateCarousel();
-  }
-
-  updateCarousel() {
-    const cardWidth = this.cards[0].offsetWidth + 20; // including gap
-    const translateX = -this.currentIndex * cardWidth;
-
-    this.track.style.transform = `translateX(${translateX}px)`;
-
-    // Update active states
-    this.cards.forEach((card, index) => {
-      card.classList.remove("wpactive-state-r3t7");
-      if (
-        index >= this.currentIndex &&
-        index < this.currentIndex + this.cardsPerView
-      ) {
-        if (index === this.currentIndex + Math.floor(this.cardsPerView / 2)) {
-          card.classList.add("wpactive-state-r3t7");
-        }
-      }
-    });
-
-    // Update indicators
-    const indicators = this.indicatorsContainer.querySelectorAll(
-      ".wpindicator-dot-f7c4"
-    );
-    indicators.forEach((indicator, index) => {
-      indicator.classList.toggle(
-        "wpactive-state-r3t7",
-        index === this.currentIndex
-      );
-    });
-
-    // Update navigation buttons
-    this.prevBtn.style.opacity = this.currentIndex === 0 ? "0.5" : "1";
-    this.nextBtn.style.opacity =
-      this.currentIndex === this.maxIndex ? "0.5" : "1";
-  }
-}
-
-// Initialize carousel when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  window.wpCarouselInstance = new WeekendPackageCarousel_WP2024();
 });
-
-// Auto-play functionality (optional)
-let wpAutoPlayInterval;
-
-function startWPAutoPlay() {
-  wpAutoPlayInterval = setInterval(() => {
-    const carousel = window.wpCarouselInstance;
-    if (carousel && carousel.currentIndex < carousel.maxIndex) {
-      carousel.next();
-    } else if (carousel) {
-      carousel.goToSlide(0);
-    }
-  }, 4000);
-}
-
-function stopWPAutoPlay() {
-  clearInterval(wpAutoPlayInterval);
-}
-
-// Uncomment to enable auto-play
-// startAutoPlay();
