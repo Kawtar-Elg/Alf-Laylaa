@@ -41,10 +41,6 @@ Voici quelques captures d’écran de l’interface utilisateur :
 - Navigation fluide entre chapitres
 - Système de favoris et sauvegarde de progression
 
-## 🚀 Lancement du projet
 
-Pour exécuter le projet en local :
 
-1. Clone le dépôt :
-   ```bash
-   git clone https://github.com/toncompte/alf-layla.git
+
